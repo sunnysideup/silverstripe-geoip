@@ -372,7 +372,7 @@ class Geoip
         if (! $codeOnly) {
             $name = substr($country, $start + 4);
             if (! $name) {
-                $name = $this->countryCode2name($code);
+                $name = self::countryCode2name($code);
             }
 
             return ['code' => $code, 'name' => $name];
