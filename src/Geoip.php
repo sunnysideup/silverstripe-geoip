@@ -278,9 +278,9 @@ class Geoip
      * Set whether the Geoip lookup should be enabled or not. Useful
      * to disable while testing or in environments Geoip lookup is wrong
      *
-     * @param $bool
+     * @param bool $bool
      */
-    public static function set_enabled($bool)
+    public static function set_enabled(bool $bool)
     {
         self::$enabled = $bool;
     }
@@ -290,7 +290,7 @@ class Geoip
      *
      * @return bool
      */
-    public static function is_enabled()
+    public static function is_enabled() : bool
     {
         return (bool) self::$enabled;
     }
@@ -300,7 +300,7 @@ class Geoip
      *
      * @param string $country_code
      */
-    public static function set_default_country_code($country_code)
+    public static function set_default_country_code(string $country_code)
     {
         self::$default_country_code = $country_code;
     }
@@ -310,7 +310,7 @@ class Geoip
      *
      * @return string
      */
-    public static function get_default_country_code()
+    public static function get_default_country_code() : string
     {
         return self::$default_country_code;
     }
@@ -326,9 +326,10 @@ class Geoip
      * $codeOnly parameter.
      *
      * @param string $address The IP address to get the country of
-     * @param boolean $codeOnly Returns just the country code
+     * @param bool $codeOnly Returns just the country code
+     * @return bool|string     returns false or country code.
      */
-    public static function ip2country($address, $codeOnly = false)
+    public static function ip2country(string $address, bool $codeOnly = false)
     {
         if (! self::is_enabled()) {
             return false;
@@ -444,7 +445,7 @@ class Geoip
      *
      * @return string|null String if country found, null if none found
      */
-    public static function countryCode2name($code)
+    public static function countryCode2name(string $code)
     {
         return isset(Geoip::$iso_3166_countryCodes[$code]) ? Geoip::$iso_3166_countryCodes[$code] : null;
     }
@@ -454,7 +455,7 @@ class Geoip
      *
      * @return array
      */
-    public static function getCountryDropDown()
+    public static function getCountryDropDown() : array
     {
         $dropdown = Geoip::$iso_3166_countryCodes;
         unset($dropdown['A1']);
