@@ -290,7 +290,7 @@ class Geoip
      *
      * @return bool
      */
-    public static function is_enabled() : bool
+    public static function is_enabled(): bool
     {
         return (bool) self::$enabled;
     }
@@ -310,7 +310,7 @@ class Geoip
      *
      * @return string
      */
-    public static function get_default_country_code() : string
+    public static function get_default_country_code(): string
     {
         return self::$default_country_code;
     }
@@ -455,7 +455,7 @@ class Geoip
      *
      * @return array
      */
-    public static function getCountryDropDown() : array
+    public static function getCountryDropDown(): array
     {
         $dropdown = Geoip::$iso_3166_countryCodes;
         unset($dropdown['A1']);
