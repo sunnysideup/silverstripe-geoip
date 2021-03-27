@@ -277,8 +277,6 @@ class Geoip
     /**
      * Set whether the Geoip lookup should be enabled or not. Useful
      * to disable while testing or in environments Geoip lookup is wrong
-     *
-     * @param bool $bool
      */
     public static function set_enabled(bool $bool)
     {
@@ -287,8 +285,6 @@ class Geoip
 
     /**
      * Return whether Geoip lookups are enabled
-     *
-     * @return bool
      */
     public static function is_enabled(): bool
     {
@@ -297,8 +293,6 @@ class Geoip
 
     /**
      * Set the default country code
-     *
-     * @param string $country_code
      */
     public static function set_default_country_code(string $country_code)
     {
@@ -307,8 +301,6 @@ class Geoip
 
     /**
      * Returns the default country code
-     *
-     * @return string
      */
     public static function get_default_country_code(): string
     {
@@ -376,7 +368,10 @@ class Geoip
                 $name = self::countryCode2name($code);
             }
 
-            return ['code' => $code, 'name' => $name];
+            return [
+                'code' => $code,
+                'name' => $name,
+            ];
         }
         return $code;
     }
@@ -452,8 +447,6 @@ class Geoip
 
     /**
      * Returns an array of ISO Country Codes -> Country Names
-     *
-     * @return array
      */
     public static function getCountryDropDown(): array
     {
