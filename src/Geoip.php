@@ -364,7 +364,7 @@ class Geoip
 
         if (! $codeOnly) {
             $name = substr($country, $start + 4);
-            if (! $name) {
+            if ($name === '') {
                 $name = self::countryCode2name($code);
             }
 
@@ -424,10 +424,10 @@ class Geoip
             $response = self::ip2country($url);
 
             if (! $response && $expectedResponse) {
-                user_error("ip2country_check failed sanity check: ip2country(${url}) returned false. Expected code: '${expectedResponse}'", E_USER_WARNING);
+                user_error("ip2country_check failed sanity check: ip2country({$url}) returned false. Expected code: '{$expectedResponse}'", E_USER_WARNING);
                 $status = false;
             } elseif ($response !== $expectedResponse) {
-                user_error("ip2country_check failed sanity check: ip2country(${url}) returned code: '{$response['code']}/{$response['name']}'. Expected code: '{$expectedResponse['code']}/{$expectedResponse['name']}'", E_USER_WARNING);
+                user_error("ip2country_check failed sanity check: ip2country({$url}) returned code: '{$response['code']}/{$response['name']}'. Expected code: '{$expectedResponse['code']}/{$expectedResponse['name']}'", E_USER_WARNING);
                 $status = false;
             }
         }
