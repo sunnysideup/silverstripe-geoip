@@ -6,14 +6,11 @@ use SilverStripe\Control\Director;
 
 /**
  * Routines for IP to country resolution.
- *
- * @package sapphire
- * @subpackage misc
  */
 class Geoip
 {
     /**
-     * ISO 3166 Country Codes
+     * ISO 3166 Country Codes.
      *
      * Includes additional codes for Europe,
      * Asia Pacific Region,Anonymous Proxies
@@ -276,7 +273,7 @@ class Geoip
 
     /**
      * Set whether the Geoip lookup should be enabled or not. Useful
-     * to disable while testing or in environments Geoip lookup is wrong
+     * to disable while testing or in environments Geoip lookup is wrong.
      */
     public static function set_enabled(bool $bool)
     {
@@ -284,7 +281,7 @@ class Geoip
     }
 
     /**
-     * Return whether Geoip lookups are enabled
+     * Return whether Geoip lookups are enabled.
      */
     public static function is_enabled(): bool
     {
@@ -292,7 +289,7 @@ class Geoip
     }
 
     /**
-     * Set the default country code
+     * Set the default country code.
      */
     public static function set_default_country_code(string $country_code)
     {
@@ -300,7 +297,7 @@ class Geoip
     }
 
     /**
-     * Returns the default country code
+     * Returns the default country code.
      */
     public static function get_default_country_code(): string
     {
@@ -317,9 +314,10 @@ class Geoip
      * To return the code only, pass in true for the
      * $codeOnly parameter.
      *
-     * @param string $address The IP address to get the country of
-     * @param bool $codeOnly Returns just the country code
-     * @return bool|string     returns false or country code.
+     * @param string $address  The IP address to get the country of
+     * @param bool   $codeOnly Returns just the country code
+     *
+     * @return bool|string returns false or country code
      */
     public static function ip2country(string $address, bool $codeOnly = false)
     {
@@ -336,10 +334,10 @@ class Geoip
         exec($cmd, $result, $code);
         // Note: At time of writing, $result is always zero for this program
 
-        if ($code === 127) {
+        if (127 === $code) {
             return false;
         }
-        if ($result === false) {
+        if (false === $result) {
             return false;
         }
 
@@ -354,7 +352,7 @@ class Geoip
         }
         $code = substr($country, $start, 2); // skip space
 
-        if ($code === 'IP' || $code === '--') {
+        if ('IP' === $code || '--' === $code) {
             if (self::$default_country_code) {
                 $code = self::$default_country_code;
             } else {
@@ -364,7 +362,7 @@ class Geoip
 
         if (! $codeOnly) {
             $name = substr($country, $start + 4);
-            if ($name === '') {
+            if ('' === $name) {
                 $name = self::countryCode2name($code);
             }
 
@@ -373,13 +371,14 @@ class Geoip
                 'name' => $name,
             ];
         }
+
         return $code;
     }
 
     /**
-     * Returns the country code, for the current visitor
+     * Returns the country code, for the current visitor.
      *
-     * @return string|bool
+     * @return bool|string
      */
     public static function visitor_country()
     {
@@ -399,7 +398,7 @@ class Geoip
 
     /**
      * Sanity Checker for this class, which helps us debug,
-     * or ensure that its working as expected
+     * or ensure that its working as expected.
      *
      * @return bool
      */
@@ -438,7 +437,7 @@ class Geoip
     /**
      * Returns the country name from the appropriate code.
      *
-     * @return string|null String if country found, null if none found
+     * @return null|string String if country found, null if none found
      */
     public static function countryCode2name(string $code)
     {
@@ -446,15 +445,15 @@ class Geoip
     }
 
     /**
-     * Returns an array of ISO Country Codes -> Country Names
+     * Returns an array of ISO Country Codes -> Country Names.
      */
     public static function getCountryDropDown(): array
     {
         $dropdown = Geoip::$iso_3166_countryCodes;
-        unset($dropdown['A1']);
-        unset($dropdown['A2']);
-        unset($dropdown['A3']);
+        unset($dropdown['A1'], $dropdown['A2'], $dropdown['A3']);
+
         asort($dropdown);
+
         return $dropdown;
     }
 }

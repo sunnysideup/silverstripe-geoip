@@ -3,6 +3,10 @@
 use SilverStripe\Dev\SapphireTest;
 use Sunnysideup\Geoip\Geoip;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class GeoipTest extends SapphireTest
 {
     public function testSetDefaultCountry()
